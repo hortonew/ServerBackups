@@ -1,0 +1,7 @@
+Steps to get running:
+
+(Debian)
+
+1) sudo apt-get install nginx
+2) cp etc/nginx/sites-enabled/001-bottleapp /etc/nginx/sites-enabled/001-bottleapp
+3) sudo service nginx restart
