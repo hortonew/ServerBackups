@@ -1,0 +1,7 @@
+Steps to get running:
+
+(Debian)
+
+1) sudo apt-get install apache2 libapache2-mod-wsgi python-bottle
+2) cp etc/apache2/sites-enabled/001-bottleapp /etc/apache2/sites-enabled/001-bottleapp && cp -r var/www/bottleapp/ /var/www/
+3) sudo service apache2 restart
