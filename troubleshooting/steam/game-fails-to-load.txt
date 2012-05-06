@@ -1,0 +1,4 @@
+Game begins to load, but nothing happens:
+
+1) Open c:/program files/steam/steamapps/common/[game name]/dependencies/
+2) Run oalinst.exe
