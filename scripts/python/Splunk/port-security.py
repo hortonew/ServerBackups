@@ -4,9 +4,25 @@ import os
 import gzip
 import csv
 import re
+import gntp.notifier
 
 #list of ip addresses that will be sent an alert
-iplist = ['192.168.1.33', '192.168.1.7', '192.168.1.5']
+iplist = ['ip.xx.xx.xx']
+
+def notify(growl_ip, growl_app_name, growl_notif, growl_def_notif, growl_pass, growl_title, growl_des, growl_nt):
+	gsend = gntp.notifier.GrowlNotifier(applicationName = growl_app_name, notifications = growl_notif, defaultNotifications = growl_def_notif, hostname = growl_ip, password = growl_pass)
+	try:
+		gsend.register()
+		gsend.notify(noteType = growl_nt, title = growl_title, description = growl_des, sticky = True, priority = 1)
+	except:
+		pass
+
+title = "Port Security"
+note_type = "Port Security"
+app_name = "Splunk Alerts"
+notif = ["General","Failed Logins","IPS Alerts", "ACS Lockouts", "Port Security", "High Temp"]
+def_notif = ["General"]
+passw = "splunkalertpassword"
 
 try:
 	mypath = r"C:\Program Files\Splunk\var\run\splunk\dispatch"
@@ -33,7 +49,7 @@ try:
 	m = re.compile("[a-f0-9]{4}\.[a-f0-9]{4}\.[a-f0-9]{4}");
 	
 	#regex to find port
-	pn = re.compile("((Gigabit|Fast)Ethernet[\d/]{3,6})");
+	pn = re.compile("((Gigabit|Fast|TenGigabit)Ethernet[\d/]{3,6})");
 	
 	#find all matches for ip, mac, port
 	d = v.findall(ourdata)
@@ -51,4 +67,5 @@ except:
 
 #run net send with our data
 for ipaddr in iplist:
-	os.system("net send %s Splunk Alert: Port Security: IP Address = %s, MAC = %s, Port = %s, filepatherror=%s, regexerror=%s" % (ipaddr, ip, mac, port, filepatherror, regexerror))
+	des = "IP: %s\nMAC: %s\nPort: %s" % (ip, mac, port)
+	notify(ipaddr, app_name, notif, def_notif, passw, title, des, note_type)
