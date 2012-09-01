@@ -1,0 +1,6 @@
+~/.kde/Autostart/conkystartup.sh
+
+feh --bg-scale ~/background.jpg && sleep 15 && conky
+
+
+~/.conkyrc
