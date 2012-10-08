@@ -1,0 +1,50 @@
+use_xft yes
+xftfont verdana:size=10
+alignment top_right
+xftalpha 0.8
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+stippled_borders 10
+border_margin 4
+border_width 1
+default_shade_color grey
+default_outline_color black
+default_color BADCDD
+use_spacer none
+no_buffers yes
+uppercase no
+color1 4D6844
+
+
+TEXT
+ #${color D3DADF}${font OpenLogos:size=45} t
+
+   ${color E36A00}Kernel:  ${alignr}${kernel}
+   ${voffset 4}Local Ip: ${alignr}${addr wlan0}
+   ${voffset 4}WAN Ip: ${alignr}${curl ifconfig.me}
+
+   ${color E36A00}Up: ${upspeed wlan0} Kb/s 
+   Down: ${downspeed wlan0} Kb/s 
+
+   Total Uploaded: ${totalup wlan0}
+   Total Downloaded: ${totaldown wlan0}
+
+   ${color 6E0005}CPU0: ${cpu cpu0}% ${cpubar cpu0}
+   CPU1: ${cpu cpu1}% ${cpubar cpu1}
+
+   ${color E36A00}Battery: ${battery_percent}% ${battery_bar}
+
+   ${color E36A00}Memory:  $mem / $memmax
+
+   Uptime:  ${uptime_short}
+
+
+ ${color E36A00}${font Radio Space:size=14}${time %A %d %Y}
+      ${font Radio Space:size=55}${time %H:%M}
+
